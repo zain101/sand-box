@@ -81,8 +81,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'sandbox.wsgi.application'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'fahad.shaikh091@gmail.com'
-EMAIL_HOST_PASSWORD = 'xvohypeklzqaqzkk'
+EMAIL_HOST_USER = 'yourgmailid@gmail.com'
+EMAIL_HOST_PASSWORD = 'yourAppPassword'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
