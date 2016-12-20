@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'allauth_bootstrap',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'workshop',
+    'crispy_forms',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -60,7 +64,7 @@ ROOT_URLCONF = 'sandbox.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,6 +80,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sandbox.wsgi.application'
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'fahad.shaikh091@gmail.com'
+EMAIL_HOST_PASSWORD = 'xvohypeklzqaqzkk'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -84,10 +94,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sandbox',
-        'USER': 'zainul',
+        'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
