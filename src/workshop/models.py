@@ -57,6 +57,7 @@ class Venue(models.Model):
 	def get_absolute_url(self):
 		return reverse("venue_detail",kwargs = {"pk": self.id })
 
+#reciving User post save signal to make entry in Member Model
 @receiver(post_save, sender=User)
 def foo(sender, **kwargs):
 	if kwargs.get('created', False):
