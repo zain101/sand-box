@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from workshop.views import mail_test
+from workshop.views import mail_test, about
 import allauth
 
 urlpatterns = [
-	url(r'^accounts/', include('allauth.urls')),
+    url(r'^$', about),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^email_test/', mail_test),
-    url(r'^', include("workshop.urls", namespace='workshop')),
     url(r'^profile/', include("profileapp.urls", namespace='profile')),
+    url(r'^venue/', include("venueapp.urls", namespace='venue')),
+    url(r'^event/', include("workshop.urls", namespace='workshop')),
 ]

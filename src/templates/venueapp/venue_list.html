@@ -3,26 +3,27 @@
 {% block title %} Events List | {{ block.super }} {% endblock %}
 
 {% block content %}
+	{% if user.is_authenticated %}
 	<div class="row">
 		<div class="col-md-offset-8 col-md-4">
-			<a class="btn btn-primary btn-block" href="{% url 'workshop:venue_create'%}">Add Venue</a>
+			<a class="btn btn-primary btn-block" href="{% url 'venue:create'%}">Add Venue</a>
 		</div>
 	</div>
 	<br>
+	{% endif %}
+	
 	<div class="row">
 	{% if venues %}
 		{% for venue in venues %}
 			<div class="col-md-4">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<a href="{% url 'workshop:venue_detail' venue.id %}">
+						<a href="{% url 'venue:detail' venue.id %}">
 						{{ venue.venueName }}
 						</a>
 					</div>
 					<div class="panel-body">
 						{{ venue.summary }}
-						<br>
-						{{ venue.website }} | {{ venue.socialLink }}
 					</div>
 				</div>
 			</div>
