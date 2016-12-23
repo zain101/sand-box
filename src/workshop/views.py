@@ -33,7 +33,7 @@ def event_create(request):
 		'form' : form,
 		'heading' : "Add New Event"
 	}
-	return render(request,'form.html',contex)
+	return render(request,'workshop/form.html',contex)
 
 class EventListView(generic.ListView):
     template_name = 'event_list.html'
@@ -44,10 +44,10 @@ class EventListView(generic.ListView):
 
 class EventDetailView(generic.DetailView):
     model = Event
-    template_name = 'event_detail.html'
+    template_name = 'workshop/event_detail.html'
 
 class VenueListView(generic.ListView):
-    template_name = 'venue_list.html'
+    template_name = 'workshop/venue_list.html'
     context_object_name = 'venues'
 
     def get_queryset(self):
@@ -55,7 +55,7 @@ class VenueListView(generic.ListView):
 
 class VenueDetailView(generic.DetailView):
     model = Venue
-    template_name = 'venue_detail.html'
+    template_name = 'workshop/venue_detail.html'
 
 @login_required()
 def venue_create(request):
@@ -72,4 +72,4 @@ def venue_create(request):
 		'form' : form,
 		'heading' : "Add Venue"
 	}
-	return render(request,'form.html',contex)
+	return render(request,'workshop/form.html',contex)

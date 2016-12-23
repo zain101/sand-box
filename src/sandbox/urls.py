@@ -22,5 +22,6 @@ urlpatterns = [
 	url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^email_test/', mail_test),
-    url(r'^', include("workshop.urls")),
+    url(r'^', include("workshop.urls", namespace='workshop')),
+    url(r'^profile/', include("profileapp.urls", namespace='profile')),
 ]

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +42,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
+    'profileapp',
     'workshop',
     'crispy_forms',
 ]
@@ -78,11 +81,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sandbox.wsgi.application'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'yourgmailid@gmail.com'
-EMAIL_HOST_PASSWORD = 'yourAppPassword'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = config.EMAIL_HOST
+EMAIL_HOST_USER = config.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
+EMAIL_PORT = config.EMAIL_PORT
+EMAIL_USE_TLS = config.EMAIL_USE_TLS
 
 
 # Database

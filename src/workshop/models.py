@@ -1,18 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
 from django.core.urlresolvers import reverse
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-
-
-class Member(models.Model):
-	user = models.OneToOneField(User, related_name='user_member')
-	location = models.CharField(max_length=100,blank=True)
-	topic =  ArrayField(models.CharField(max_length=20),blank=True, null=True)
-	
-	def __unicode__(self):
-		return self.user.username
+from profileapp.models import Member
 
 class Event(models.Model):
 	activityName = models.CharField(max_length=200)
@@ -25,7 +13,7 @@ class Event(models.Model):
 	terms = models.TextField(blank=True)
 	confirmation = models.BooleanField(default=False)
 	cost = models.FloatField(default=0.0)
-	user = models.ForeignKey('Member')
+	user = models.ForeignKey('profileapp.Member')
 
 	def __unicode__(self):
 		return self.activityName
@@ -57,8 +45,3 @@ class Venue(models.Model):
 	def get_absolute_url(self):
 		return reverse("venue_detail",kwargs = {"pk": self.id })
 
-#reciving User post save signal to make entry in Member Model
-@receiver(post_save, sender=User)
-def foo(sender, **kwargs):
-	if kwargs.get('created', False):
-		user = Member.objects.get_or_create(user=kwargs.get('instance'))
