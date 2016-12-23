@@ -56,8 +56,22 @@
                                 <span class="caret"></span>
                             </a>
                             
+                            
+
                             <ul class="dropdown-menu">
-                                <li><a href="{% url 'profile:update' %}">Update Profile</a></li>
+                                <li>
+                                    <a href="{% url 'profile:update' %}">
+                                        Update Profile
+                                    </a>
+                                </li>
+                                {% if user.user_member.isOrganizer%}
+                                <li>
+                                    <a href="{% url 'workshop:self_created' %}">
+                                        My Events
+                                    </a>
+                                </li>
+                                {% endif %}
+
                                 <li role="separator" class="divider"></li>
                                 <!-- <li class="dropdown-header">Logout</li> -->
                                 <li><a href="/accounts/logout">Logout</a></li>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 
+
 class Venue(models.Model):
 	user = models.OneToOneField(User, related_name='user_venue')
 	venueName = models.CharField(max_length=500)

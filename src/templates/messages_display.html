@@ -4,6 +4,7 @@
 			<ul class="message">
 				{% for message in messages %}
 					<li {%if message.tags %} class="{{ message.tags }}" {% endif %}}>
+						-->{{ message.level }}<--
 						{% if "html_safe" in message.tags %}
 							{{ message|safe }}
 						{% else %}
@@ -18,12 +19,11 @@
 
 
 {% if messages %}
-	<div class="col-md-8 col-md-offset-2 alert alert-info">
-		<ul>
+	<div class="col-md-8 col-md-offset-2 ">
 			{% for message in messages %}
-				<li>
-					{{ message }}
-				</li>
+				<div {%if message.tags %} class="text-center alert alert-{{ message.tags }}" {% endif %}}>
+					{{ message|safe }}
+				</div>
 			{% endfor %}
 		</ul>
 	</div>
