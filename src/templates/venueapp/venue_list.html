@@ -25,6 +25,13 @@
 					<div class="panel-body">
 						{{ venue.summary }}
 					</div>
+					{% if venue.user == user.user_member %}
+					<div class="panel-footer">
+						<a href="{% url 'venue:edit' venue.id %}" class="btn btn-default">
+							Edit
+						</a>
+					</div>
+					{% endif %}
 				</div>
 			</div>
 		{% endfor %}

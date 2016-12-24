@@ -79,14 +79,14 @@ def event_update(request,pk):
 
 
 class EventListView(generic.ListView):
-    template_name = 'event_list.html'
+    template_name = 'workshop/event_list.html'
     context_object_name = 'events'
 
     def get_queryset(self):
         return Event.objects.all()
 
 class MyEventListView(generic.ListView):
-    template_name = 'event_list.html'
+    template_name = 'workshop/event_list.html'
     context_object_name = 'events'
 
     def get_queryset(self):

@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Venue(models.Model):
-	user = models.OneToOneField(User, related_name='user_venue')
+	user = models.ForeignKey('profileapp.Member')
 	venueName = models.CharField(max_length=500)
 	summary = models.CharField(max_length=1000)
 	website = models.URLField(blank=True)

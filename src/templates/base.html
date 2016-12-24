@@ -71,6 +71,14 @@
                                     </a>
                                 </li>
                                 {% endif %}
+                                {% if user.user_member.isVenue %}
+                                <li>
+                                    <a href="{% url 'venue:self_created' %}">
+                                        My Venue
+                                    </a>
+                                </li>
+                                {% endif %}
+
 
                                 <li role="separator" class="divider"></li>
                                 <!-- <li class="dropdown-header">Logout</li> -->
