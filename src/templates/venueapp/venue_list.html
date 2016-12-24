@@ -5,13 +5,31 @@
 {% block content %}
 	{% if user.is_authenticated and user.user_member.isVenue %}
 	<div class="row">
-		<div class="col-md-offset-8 col-md-4">
+		<div class="col-md-6">
+			<div class="btn-group">
+				<a class="btn btn-default" href="{% url 'auth_uri' %}">
+					Authenticate for calendar
+				</a>
+				<a class="btn btn-default" href="{% url 'venue:calendar_events' %}">
+					My Events
+				</a>
+				<a class="btn btn-default" href="{% url 'venue:calendar_create_event' %}">
+					Create Test Event
+				</a>
+			</div>
+		</div>
+		<div class="col-md-offset-2 col-md-4">
 			<a class="btn btn-primary btn-block" href="{% url 'venue:create'%}">Add Venue</a>
 		</div>
+		
 	</div>
 	<br>
+	
+	
+
 	{% endif %}
 	
+	<hr>
 	<div class="row">
 	{% if venues %}
 		{% for venue in venues %}

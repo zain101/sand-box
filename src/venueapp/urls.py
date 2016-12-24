@@ -8,4 +8,6 @@ urlpatterns = [
 	url(r'^create$', views.create, name='create'),
 	url(r'^(?P<pk>[0-9]+)/$',views.VenueDetailView.as_view(), name="detail"),
 	url(r'^(?P<pk>[0-9]+)/edit$',views.venue_update, name="edit"),
+	url(r'^calendar-events$',views.calendar_events, name="calendar_events"),
+	url(r'^create-event$',views.create_test_event, name="calendar_create_event"),
 ]
