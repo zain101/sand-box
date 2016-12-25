@@ -1,9 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import UserForm, MemberForm
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Member
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 
+@login_required()
 def index(request):
 
 	# instance = get_object_or_404(Member, slug=slug)
@@ -37,3 +43,7 @@ def index(request):
 	}
 
 	return render(request, 'profileapp/form.html',contex)
+
+@receiver(post_save, sender=User)
+def redirect_update_profile(sender, **kwargs):
+	redirect(reverse('profile:update'))

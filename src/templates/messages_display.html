@@ -21,7 +21,7 @@
 {% if messages %}
 	<div class="col-md-8 col-md-offset-2 ">
 			{% for message in messages %}
-				<div {%if message.tags %} class="text-center alert alert-{{ message.tags }}" {% endif %}}>
+				<div {%if message.tags %} class="text-center alert alert-{{ message.tags }}" {% endif %}>
 					{{ message|safe }}
 				</div>
 			{% endfor %}

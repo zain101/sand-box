@@ -89,6 +89,9 @@ EMAIL_PORT = config.EMAIL_PORT
 EMAIL_USE_TLS = config.EMAIL_USE_TLS
 
 
+SOCIALACCOUNT_ADAPTER = "venueapp.adapter.SocialAccountAdapter"
+
+
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
