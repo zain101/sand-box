@@ -1,10 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from .forms import EventForm
 from django.contrib import messages
 from django.views import generic
-from .models import Event
+from .models import Event #,EventEnrolment
 from profileapp.models import Member
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -95,3 +95,18 @@ class MyEventListView(generic.ListView):
 class EventDetailView(generic.DetailView):
     model = Event
     template_name = 'workshop/event_detail.html'
+
+@login_required()
+def enroll(request, pk):
+	event = Event.objects.get(pk=pk)
+	enrolled_events = request.user.event_set.all()
+	print enrolled_events
+
+	if not event in enrolled_events:
+		event.enrolled_users.add(request.user)
+		event.save()
+		messages.info(request, "Successfully enrolled for the event '%s'" % (event.activityName) )
+		return redirect(reverse('workshop:index'))
+	else:
+		messages.info(request, "You have already enrolled for this event")
+		return redirect(reverse('workshop:index'))
