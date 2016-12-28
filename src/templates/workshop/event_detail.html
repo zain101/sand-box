@@ -38,24 +38,28 @@
 	<h2>Enrolled Users</h2>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Sr.</th>
-						<th>Name</th>
-						<th>Email</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for user in event.enrolled_users.all %}
-					<tr>
-						<td>{{ user.pk }}</td>
-						<td>{{ user.username }}</td>
-						<td>{{ user.email }}</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+			{% if event.enrolled_users.all %}
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Sr.</th>
+							<th>Name</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in event.enrolled_users.all %}
+						<tr>
+							<td>{{ user.pk }}</td>
+							<td>{{ user.username }}</td>
+							<td>{{ user.email }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% else %} 
+				No Enrollment yet
+			{% endif %}
 		</div>
 	</div>
 	{% endif %}

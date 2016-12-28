@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from .utils import get_service
 from oauth2client import client
+from allauth.account.decorators import verified_email_required
 
 
 from oauth2client.client import flow_from_clientsecrets
@@ -27,7 +28,7 @@ class VenueDetailView(generic.DetailView):
     model = Venue
     template_name = 'venueapp/venue_detail.html'
 
-@login_required()
+@verified_email_required
 def create(request):
 	form = VenueForm(request.POST or None)
 
@@ -50,7 +51,7 @@ class MyVenueListView(generic.ListView):
     def get_queryset(self):
         return Venue.objects.filter(user=self.request.user.user_member)
 
-@login_required()
+@verified_email_required
 def venue_update(request, pk):
 	#getting member object of current user
 	user = Member.objects.filter(user=request.user)[0]

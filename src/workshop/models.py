@@ -15,7 +15,7 @@ class Event(models.Model):
 	confirmation = models.BooleanField(default=False)
 	cost = models.FloatField(default=0.0)
 	user = models.ForeignKey('profileapp.Member')
-	enrolled_users = models.ManyToManyField(User)
+	enrolled_users = models.ManyToManyField(User, blank=True)
 
 	def __unicode__(self):
 		return self.activityName

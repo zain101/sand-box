@@ -12,8 +12,6 @@
 	<br>
 	{% endif %}
 	
-	{{ event_enroll }}
-
 	<div class="row">
 	{% if events %}
 		{% for event in events %}
@@ -32,12 +30,6 @@
 						</a>
 					</div>
 					<div class="panel-body">
-						{% if event in user.event_set.all %}
-							<h3>enrolled</h3>
-						{% else %}
-							<h3>Not enrolled</h3>
-						{% endif %}
-
 						{{ event.information }}
 						<br>
 						{{ event.schedule }}

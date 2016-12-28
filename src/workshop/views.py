@@ -8,13 +8,15 @@ from .models import Event #,EventEnrolment
 from profileapp.models import Member
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from allauth.account.decorators import verified_email_required
+
 
 def mail_test(request):
 	send_mail('Subject here', 'Here is the message.', 'fahad.shaikh091@gmail.com', ['fahad.shaikh091@gmail.com','fahad_shaikh09@yahoo.co.in'], fail_silently=False)
 	
 	return HttpResponse("testing")
 
-@login_required()
+@verified_email_required
 def event_create(request):
 	user = Member.objects.filter(user=request.user)[0]
 	
@@ -41,7 +43,7 @@ def event_create(request):
 	}
 	return render(request,'workshop/form.html',contex)
 
-@login_required()
+@verified_email_required
 def event_update(request,pk):
 
 	#getting member object of current user
@@ -83,7 +85,7 @@ class EventListView(generic.ListView):
     context_object_name = 'events'
 
     def get_queryset(self):
-        return Event.objects.all()
+        return Event.objects.all().order_by('-schedule')
 
 class MyEventListView(generic.ListView):
     template_name = 'workshop/event_list.html'
@@ -96,7 +98,7 @@ class EventDetailView(generic.DetailView):
     model = Event
     template_name = 'workshop/event_detail.html'
 
-@login_required()
+@verified_email_required
 def enroll(request, pk):
 	event = Event.objects.get(pk=pk)
 	enrolled_events = request.user.event_set.all()
