@@ -4,7 +4,6 @@ import os
 import httplib2
 from apiclient import discovery 
 
-
 def get_service(request):
 	BASE = os.path.dirname(os.path.abspath(__file__))
 	client_secret_path = os.path.join(BASE, 'client_secret.json')

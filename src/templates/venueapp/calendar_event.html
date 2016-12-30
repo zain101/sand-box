@@ -4,6 +4,7 @@
 	{% if events %}
 		{% for event in events %}
 			Start : {{ event.start.dateTime }}<br>
+			End : {{ event.end.dateTime }}<br>
 			Summary : {{ event.summary }}<br>
 			<a href="{{ event.htmlLink }}">link to google calendar</a>
 			<hr>

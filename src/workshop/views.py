@@ -9,12 +9,7 @@ from profileapp.models import Member
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from allauth.account.decorators import verified_email_required
-
-
-def mail_test(request):
-	send_mail('Subject here', 'Here is the message.', 'fahad.shaikh091@gmail.com', ['fahad.shaikh091@gmail.com','fahad_shaikh09@yahoo.co.in'], fail_silently=False)
-	
-	return HttpResponse("testing")
+import csv
 
 @verified_email_required
 def event_create(request):
@@ -78,8 +73,6 @@ def event_update(request,pk):
 	}
 	return render(request,'workshop/form.html',contex)
 	
-
-
 class EventListView(generic.ListView):
     template_name = 'workshop/event_list.html'
     context_object_name = 'events'
@@ -112,3 +105,29 @@ def enroll(request, pk):
 	else:
 		messages.info(request, "You have already enrolled for this event")
 		return redirect(reverse('workshop:index'))
+
+@verified_email_required
+def download_csv(request, pk):
+	event = get_object_or_404(Event, pk=pk)
+
+	filename = event.activityName +"_id" + str(event.id) + ".csv"
+
+	if request.user.user_member != event.user:
+		messages.warning(request, "You dont have permission to access this url")
+		return redirect(reverse('workshop:detail', kwargs={'pk' : event.pk }))
+
+	enrolled_users = event.enrolled_users.all()
+	if not enrolled_users:
+		messages.info(request, "No user have enrolled yet")
+		return redirect(reverse('workshop:detail', kwargs={'pk' : event.pk }))
+
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename="%s"' % (filename)
+
+	writer = csv.writer(response)
+	
+	writer.writerow(['Sr', 'Username', 'Email'])
+	for i,enroll in enumerate(enrolled_users):
+		writer.writerow([str(i+1), enroll.username , enroll.email])
+
+	return response

@@ -39,6 +39,12 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			{% if event.enrolled_users.all %}
+				<a href="{% url 'workshop:csv' event.pk %}">
+					<span class="glyphicon glyphicon-download-alt">
+					</span>
+					Download as CSV
+				</a>
+				<br><br>
 				<table class="table">
 					<thead>
 						<tr>
@@ -50,7 +56,7 @@
 					<tbody>
 						{% for user in event.enrolled_users.all %}
 						<tr>
-							<td>{{ user.pk }}</td>
+							<td>{{ forloop.counter }}</td>
 							<td>{{ user.username }}</td>
 							<td>{{ user.email }}</td>
 						</tr>
