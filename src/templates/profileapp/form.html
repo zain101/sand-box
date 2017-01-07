@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% comment %}
+{% block title %} Events List | {{ block.super }} {% endblock %}
+{% endcomment %}
+
+{% block content %}
+	<div class="col-md-6 col-md-offset-3 jumbotron">
+
+		<h2>Testing Form</h2>
+		<form action="" method="POST">
+		{% csrf_token %}
+		{{ member_form.as_p}}
+		{{ user_form.as_p }}
+		<br>
+		<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+{% endblock %}

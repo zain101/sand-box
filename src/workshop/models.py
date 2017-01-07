@@ -1,41 +1,24 @@
 from django.db import models
+from django.core.urlresolvers import reverse
+from profileapp.models import Member
 from django.contrib.auth.models import User
 
-
-
-class Member(models.Model):
-	user = models.OneToOneField(User, related_name='user_member')
-	location = # varchar
-	topic =  # postgres list type
-
 class Event(models.Model):
-	activity_name = #varchar
-	activity_type =  #varchar
-	schedule = #Datetime
-	venue = #FK to venue
-	information = #varchar
-	content = #varchar
-	photos  = #blob or link
-	terms = #varchar
-	confirmation = #bool agree or not
-	cost = #float
-	user = #FK to member
+	activityName = models.CharField(max_length=200)
+	activityType =  models.CharField(max_length=200)
+	schedule = models.DateTimeField(auto_now_add=False)
+	venue = models.ForeignKey('venueapp.Venue')
+	information = models.CharField(max_length=500,blank=True)
+	content = models.TextField(blank=True)
+	photo  = models.ImageField(blank=True)
+	terms = models.TextField(blank=True)
+	confirmation = models.BooleanField(default=False)
+	cost = models.FloatField(default=0.0)
+	user = models.ForeignKey('profileapp.Member')
+	enrolled_users = models.ManyToManyField(User, blank=True)
 
+	def __unicode__(self):
+		return self.activityName
 
-class Venue(models.Model):
-	venue_name = 
-	summary =
-	website = 
-	social_link =
-	cover_photo = 
-	logo =
-	contact_info = 
-	email = 
-	location = 
-	phone = 
-	gmail_calender = 
-	confirmation = #bool
-	wifi_avalibility = #bool
-	capacity = 
-	catering_avalible = #bool
-	       
+	def get_absolute_url(self):
+		return reverse("workshop:detail",kwargs = {"pk": self.id })

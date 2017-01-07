@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %} Events List | {{ block.super }} {% endblock %}
+
+{% block content %}
+	{% if user.is_authenticated and user.user_member.isVenue %}
+	<div class="row">
+		<div class="col-md-6">
+			<div class="btn-group">
+				<a class="btn btn-default" href="{% url 'auth_uri' %}">
+					Authenticate for calendar
+				</a>
+				<a class="btn btn-default" href="{% url 'venue:calendar_events' %}">
+					My Events
+				</a>
+				<a class="btn btn-default" href="{% url 'venue:calendar_create_event' %}">
+					Create Test Event
+				</a>
+			</div>
+		</div>
+		<div class="col-md-offset-2 col-md-4">
+			<a class="btn btn-primary btn-block" href="{% url 'venue:create'%}">Add Venue</a>
+		</div>
+		
+	</div>
+	<hr>
+	
+	{% endif %}
+	
+	<div class="row">
+	{% if venues %}
+		{% for venue in venues %}
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a href="{% url 'venue:detail' venue.id %}">
+						{{ venue.venueName }}
+						</a>
+					</div>
+					<div class="panel-body">
+						{{ venue.summary }}
+					</div>
+					{% if venue.user == user.user_member %}
+					<div class="panel-footer">
+						<a href="{% url 'venue:edit' venue.id %}" class="btn btn-default">
+							Edit
+						</a>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<p>No venue Yet</p>
+
+	{% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block head_extra %}
+{{ form.media }}
+{%endblock head_extra %}
+
+
+{% block title %} Create Event | {{ block.super }} {% endblock %}
+
+{% block content %}
+
+	{# block.super renders the superblock content #}
+	{{ block.super }}
+	
+	<div class="col-md-10 col-md-offset-1">
+		<h2>{{ heading }}</h2>
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+{% endblock %}

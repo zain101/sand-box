@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Events List | {{ block.super }} {% endblock %}
+
+{% block content %}
+	<div class="col-md-6 col-md-offset-3">
+		<h1>{{ venue.venueName }}</h1>
+		<hr>
+		Venue Name : <strong>{{ venue.venueName }}</strong><br>
+		Summary : {{ venue.summary }}<br>
+		Email : {{ venue.email }}<br>
+		Location : {{ venue.location }}<br>
+		Phone : {{ venue.phone }}<br>
+		Capacity : {{ venue.capacity }}<br>
+	</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %} Events List | {{ block.super }} {% endblock %}
+
+{% block content %}
+	{% if event.user != user.user_member %}
+		<div>
+		{% if event in user.event_set.all %}
+				Already Enrolled
+		{% else %}
+			<a href="{% url 'workshop:enroll' event.id %}" class="btn btn-primary">
+				Enroll Now
+			</a>
+		{% endif %}
+		</div>
+	{% endif %}
+	
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h1>{{ event.activityName }}</h1>
+			<hr>
+			Activity Name : <strong>{{ event.activityName }}</strong><br>
+			Activity Type : {{ event.activityType }}<br>
+			Venue : {{ event.venue }}<br>
+			Info : {{ event.information }}<br>
+			Schedule : {{ event.schedule }}<br>
+			cost : {{ event.cost }}<br>
+		</div>
+	</div>
+	
+	{% if user.is_authenticated and event.user == user.user_member %}
+	<hr>
+	<div>
+		<a href="{% url 'workshop:edit' event.id %}" class="btn btn-info">
+			Edit
+		</a>
+	</div>
+	<h2>Enrolled Users</h2>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			{% if event.enrolled_users.all %}
+				<a href="{% url 'workshop:csv' event.pk %}">
+					<span class="glyphicon glyphicon-download-alt">
+					</span>
+					Download as CSV
+				</a>
+				<br><br>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Sr.</th>
+							<th>Name</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in event.enrolled_users.all %}
+						<tr>
+							<td>{{ forloop.counter }}</td>
+							<td>{{ user.username }}</td>
+							<td>{{ user.email }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% else %} 
+				No Enrollment yet
+			{% endif %}
+		</div>
+	</div>
+	{% endif %}
+
+{% endblock %}
