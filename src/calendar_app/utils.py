@@ -18,9 +18,9 @@ def get_service(request):
 	token = user.user_token
 
 	credentials = client.OAuth2Credentials(
-		access_token= token.access_token,
-		refresh_token=token.refresh_token,
-		token_expiry=token.token_expiry,
+		access_token= token.accessToken,
+		refresh_token=token.refreshToken,
+		token_expiry=token.tokenExpiry,
 		token_uri=client_secret['installed']['token_uri'],
 		client_id= client_secret['installed']['client_id'],
 		client_secret=client_secret['installed']['client_secret'],

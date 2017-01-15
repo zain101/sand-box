@@ -26,12 +26,3 @@ class Venue(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("venue:detail",kwargs = {"pk": self.id })
-
-class CalendarToken(models.Model):
-	user = models.OneToOneField(User, related_name='user_token')
-	access_token= models.TextField()
-	refresh_token=models.TextField(blank=True)
-	token_expiry=models.DateTimeField(blank=True, null=True)
-
-	def __unicode__(self):
-		return self.user.username

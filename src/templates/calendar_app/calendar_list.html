@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Calendar List</h1>
+	<a href="{% url 'calendar_app:sync_calendar_list' %}">Sync Now</a>
+	<hr>
+	{% if calendars %}
+		{% for calendar in calendars %}
+			<h2>
+				<a href="{% url 'calendar_app:calendar_events' calendar.id %}">
+					{{ calendar.summary }}
+				</a>
+			</h2>
+			<strong>Summary : </strong>{{ calendar.summary }}<br>
+			<strong>Description : </strong>{{ calendar.description }}<br>
+			<strong>Location : </strong>{{ calendar.location }}<br>
+			<hr>
+		{% endfor %}
+	{% else %}
+		No Calendar Found
+	{% endif %}
+	
+{% endblock %}

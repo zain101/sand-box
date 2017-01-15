@@ -3,6 +3,15 @@
 {% block title %} Events List | {{ block.super }} {% endblock %}
 
 {% block content %}
+	<div class="row">
+		<center>
+			<div class="btn-group">
+				<a class="btn btn-default" href="{% url 'calendar_app:calendar_list' %}">Calendar List</a>
+				<a class="btn btn-default" href="{% url 'calendar_app:sync_calendar_list' %}">Sync Calendar List</a>
+			</div>
+		</center>
+	</div>
+	<hr>
 	<div class="col-md-6 col-md-offset-3 jumbotron">
 		<h2 class="text-center">Welcome To SandBox</h2>
 		<hr>

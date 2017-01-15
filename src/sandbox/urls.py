@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from venueapp.views import oauth2callback
+from calendar_app.views import oauth2callback
 import allauth
 from django.views.generic import TemplateView
 
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^profile/', include("profileapp.urls", namespace='profile')),
     url(r'^venue/', include("venueapp.urls", namespace='venue')),
     url(r'^event/', include("workshop.urls", namespace='workshop')),
+    url(r'^calendar/', include("calendar_app.urls", namespace='calendar_app')),
     url(r'^oauth2callback/', oauth2callback, name='auth_uri'),
 
 ]

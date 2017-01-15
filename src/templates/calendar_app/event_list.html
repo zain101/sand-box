@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Event List of Calendar {{ calendar.summary }}</h1>
+<strong>Google Calendar ID : </strong> {{ calendar.calendarIdG }}<br>
+<strong>Last Sync : </strong>
+	{% if calendar.isSynced %} 
+		{{ calendar.lastSync }}
+	{% else %}
+		Not Synced yet
+	{% endif %} |  
+<a href="{% url 'calendar_app:sync_events' calendar.pk %}">Sync Now</a>
+
+	<hr>
+	{% if events %}
+		{% for item in events %}
+			<h2>
+				{% if item.summary %}
+					{{ item.summary }}
+				{% else %}
+					Untitled Event
+				{% endif %}
+			</h2>
+			<strong>Status</strong> : {{ item.status }}<br>
+			<strong>HTML link</strong> : <a href="{{ item.htmlLink }}" target="_blank">{{ item.htmlLink }}</a><br>
+			<strong>Created</strong> : {{ item.created }}<br>
+			<strong>Updated</strong> : {{ item.updated }}<br>
+			<strong>Start</strong> : {{ item.start }}<br>
+			<strong>End</strong> : {{ item.end }}<br>
+			<strong>Transparency</strong> : {{ item.transparency }}<br>
+			<hr>
+		{% endfor %}
+	{% else %}
+		No Event(s) Found
+	{% endif %}
+
+{% endblock %}
